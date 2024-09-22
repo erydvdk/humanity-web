@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import b1 from "../../src/assets/wallpaper/b1.jpeg";
 import b2 from "../../src/assets/wallpaper/b2.jpeg";
 import b3 from "../../src/assets/wallpaper/b3.jpg";
-import { Carousel } from "flowbite-react";
+import { Carousel } from "antd";
 
 const Home = () => {
   return (
@@ -18,23 +18,23 @@ const Home = () => {
       }
       keywords={"help, educate, donate,welfare society"}
     >
-      <section className="">
+      <section className="mb-32 xl:mb-16">
         <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
-          <Carousel>
-            <div className="flex h-full items-center justify-center">
-              <img src={b1} alt="banner1" />
+          <Carousel autoplay>
+            <div className="">
+              <img className="w-full h-96" src={b1} alt="banner1" />
             </div>
-            <div className="flex h-full items-center justify-center">
-              <img src={b2} alt="banner2" />
+            <div className="">
+              <img className="w-full h-96" src={b2} alt="banner2" />
             </div>
-            <div className="flex h-full items-center justify-center">
-              <img src={b3} alt="banner3" />
+            <div className="">
+              <img className="w-full h-96" src={b3} alt="banner3" />
             </div>
           </Carousel>
         </div>
       </section>
 
-      <section>
+      <section className="inline-block mt-10">
         <div className="relative bg-gradient-to-r mt-4 overflow-hidden">
           <div className="relative z-10 flex flex-col justify-center items-center h-full text-center">
             <h2 className="text-3xl font-bold leading-tight text-blue-900">
