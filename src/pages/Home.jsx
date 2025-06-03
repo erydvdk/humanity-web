@@ -1,235 +1,264 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import Layout from "../layout/Layout";
-import education1 from "../../src/assets/wallpaper/education.jpeg";
-import awareness from "../../src/assets/wallpaper/11.jpg";
-import woman from "../../src/assets/wallpaper/woman.jpg";
-import helth from "../../src/assets/wallpaper/health.jpeg";
-import { Link } from "react-router-dom";
-import b1 from "../../src/assets/wallpaper/b1.jpeg";
-import b2 from "../../src/assets/wallpaper/b2.jpeg";
-import b3 from "../../src/assets/wallpaper/b3.jpg";
-import { Carousel } from "antd";
+import Hero from "../components/Hero";
+import VisionSection from "../components/VisionSection";
+import InitiativesSection from "../components/InitiativesSection";
+import TestimonialsSection from "../components/TestimonialsSection";
+import { 
+  UserGroupIcon, 
+  AcademicCapIcon, 
+  HeartIcon,
+  TrophyIcon,
+  UsersIcon
+} from '@heroicons/react/24/outline';
 
 const Home = () => {
+  const stats = [
+    {
+      icon: UsersIcon,
+      number: "100+",
+      label: "Active Volunteers",
+      color: "from-orange-500 to-red-500",
+      featured: true
+    },
+    {
+      icon: UserGroupIcon,
+      number: "1000+",
+      label: "Lives Impacted",
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      icon: AcademicCapIcon,
+      number: "500+",
+      label: "Students Educated",
+      color: "from-green-500 to-emerald-500"
+    },
+    {
+      icon: HeartIcon,
+      number: "200+",
+      label: "Medical Camps",
+      color: "from-red-500 to-pink-500"
+    },
+    {
+      icon: TrophyIcon,
+      number: "50+",
+      label: "Awards & Recognition",
+      color: "from-purple-500 to-indigo-500"
+    }
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" }
+    }
+  };
+
   return (
     <Layout
-      title={"Namaskar Humanity Welfare Society -Home"}
+      title={"Namaskar Humanity Welfare Society - Transforming Lives, Building Hope"}
       description={
-        "Namaskar Humanity Welfare Society is a UP government-registered NGO dedicated to making a positive impact on society through various initiatives. Our primary focus is on providing quality education, accessible healthcare services, and raising awareness on critical social issues. We are also committed to the empowerment of women, helping them gain independence and self-sufficiency through skill development and support programs. Our mission is to uplift underserved communities by addressing their most pressing needs, fostering growth, and creating opportunities for a better, more equitable future for all."
+        "Join Namaskar Humanity Welfare Society in creating lasting change through education, healthcare, and women empowerment initiatives. A UP government-registered NGO making a positive impact on society."
       }
-      keywords={"help, educate, donate,welfare society"}
+      keywords={"NGO, charity, education, healthcare, women empowerment, social work, volunteer, donate, Namaskar Humanity, UP government registered"}
     >
-      <section className="mb-32 xl:mb-16">
-        <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
-          <Carousel autoplay>
-            <div className="">
-              <img className="w-full h-96" src={b1} alt="banner1" />
+      {/* Hero Section */}
+      <Hero />
+
+      {/* Welcome Message Section */}
+      <section className="py-20 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div className="container mx-auto px-6 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <motion.div variants={itemVariants} className="mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                Welcome to Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Mission</span>
+              </h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-8"></div>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+              <div className="flex items-center justify-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
+                  <span className="text-2xl font-bold text-white">AS</span>
             </div>
-            <div className="">
-              <img className="w-full h-96" src={b2} alt="banner2" />
             </div>
-            <div className="">
-              <img className="w-full h-96" src={b3} alt="banner3" />
-            </div>
-          </Carousel>
+              <blockquote className="text-xl md:text-2xl text-gray-700 leading-relaxed mb-6 italic">
+                "I'm Anurag Singh and I'm super excited to welcome you to Namaskar Humanity Welfare Society. 
+                Together, we can create meaningful change and build a better future for those who need it most."
+              </blockquote>
+              <cite className="text-lg font-semibold text-blue-600">- Anurag Singh, Founder</cite>
+              
+              <p className="text-lg text-gray-600 leading-relaxed mt-8" style={{ fontFamily: "'Inter', sans-serif" }}>
+                Namaskar Humanity Welfare Society is a UP government-registered NGO dedicated to making a positive 
+                impact on society through various initiatives. Our primary focus is on providing quality education, 
+                accessible healthcare services, and raising awareness on critical social issues.
+              </p>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      <section className="inline-block mt-10">
-        <div className="relative bg-gradient-to-r mt-4 overflow-hidden">
-          <div className="relative z-10 flex flex-col justify-center items-center h-full text-center">
-            <h2 className="text-3xl font-bold leading-tight text-blue-900">
-              I'm Anurag Singh and I'm super excited to welcome you to at
-              Namaskar Humanity Welfare Society
-            </h2>
-            <p className="text-lg text-gray-900 w-[96%]">
-              Namaskar Humanity Welfare Society is a UP government-registered
-              NGO dedicated to making a positive impact on society through
-              various initiatives. Our primary focus is on providing quality
-              education, accessible healthcare services, and raising awareness
-              on critical social issues. We are also committed to the
-              empowerment of women, helping them gain independence and
-              self-sufficiency through skill development and support programs.
-              Our mission is to uplift underserved communities by addressing
-              their most pressing needs, fostering growth, and creating
-              opportunities for a better, more equitable future for all.
-            </p>
-          </div>
+      {/* Vision Section */}
+      <VisionSection />
+
+      {/* Statistics Section */}
+      <section className="py-20 bg-gradient-to-r from-gray-900 to-blue-900">
+        <div className="container mx-auto px-6 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <motion.h2 
+              variants={itemVariants}
+              className="text-4xl md:text-5xl font-bold text-white mb-6" 
+              style={{ fontFamily: "'Poppins', sans-serif" }}
+            >
+              Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">Impact</span>
+            </motion.h2>
+            <motion.p 
+              variants={itemVariants}
+              className="text-xl text-gray-300 max-w-3xl mx-auto"
+              style={{ fontFamily: "'Inter', sans-serif" }}
+            >
+              See the difference we've made together in transforming lives across communities
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8"
+          >
+            {stats.map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                variants={itemVariants}
+                className={`text-center group ${stat.featured ? 'lg:col-span-1 lg:scale-110' : ''}`}
+              >
+                <div className={`${stat.featured ? 'w-24 h-24' : 'w-20 h-20'} bg-gradient-to-r ${stat.color} rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 ${stat.featured ? 'ring-4 ring-orange-400/30 shadow-2xl shadow-orange-500/25' : ''}`}>
+                  <stat.icon className={`${stat.featured ? 'w-12 h-12' : 'w-10 h-10'} text-white`} />
+                </div>
+                <motion.h3 
+                  className={`${stat.featured ? 'text-5xl md:text-6xl' : 'text-4xl'} font-bold text-white mb-2 ${stat.featured ? 'text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400' : ''}`}
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: index * 0.2, duration: 0.8 }}
+                  style={{ fontFamily: "'Poppins', sans-serif" }}
+                >
+                  {stat.number}
+                </motion.h3>
+                <p className={`${stat.featured ? 'text-orange-200 font-bold text-lg' : 'text-gray-300 font-medium'}`} style={{ fontFamily: "'Inter', sans-serif" }}>
+                  {stat.label}
+                </p>
+                {stat.featured && (
+                  <motion.div 
+                    className="mt-4 bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold inline-block"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5, duration: 0.6 }}
+                  >
+                    🌟 Growing Strong!
+                  </motion.div>
+                )}
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
-      <section>
-        <div className="relative bg-gradient-to-r mt-4 overflow-hidden">
-          <div className="relative z-10 flex flex-col justify-center items-center h-full text-center">
-            <h2 className="text-4xl font-bold leading-tight text-blue-900">
-              Our Vision
-            </h2>
-            <p className="text-lg mb-8 mx-2 w-[96%]">
-              Namaskar Humanity Welfare Society is an NGO with a clear vision to
-              create a just and inclusive society where every individual,
-              regardless of their background, has access to education,
-              healthcare, and equal opportunities. Our vision is to empower the
-              underprivileged, promote gender equality, and raise awareness
-              about social and environmental issues. We strive to build a
-              compassionate community where everyone can thrive, contribute, and
-              lead a dignified life. Through sustainable development initiatives
-              and collaborative efforts, we aim to bring lasting positive change
-              to society.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Initiatives Section */}
+      <InitiativesSection />
 
-      <section>
-        <div className="container mx-auto flex px-5 md:flex-row flex-col items-center">
-          <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-            <h2 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-blue-900">
-              Education
-            </h2>
-            <p className="mb-4 leading-relaxed">
-              Education is the key to unlocking opportunities and breaking the
-              cycle of poverty. Namaskar Humanity is dedicated to promoting
-              education by providing resources, scholarships, and support to
-              students in need. We believe that education is a fundamental
-              right, not a privilege.
-            </p>
-          </div>
-          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-            <img
-              className="object-cover object-center rounded"
-              alt="hero"
-              src={education1}
-            />
-          </div>
-        </div>
-        <div className="container mx-auto flex px-5 py-10 md:flex-row flex-col items-center">
-          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 max-sm:hidden max-md:hidden ">
-            <img
-              className="object-cover object-center rounded"
-              alt="hero"
-              src={awareness}
-            />
-          </div>
-          <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-            <h2 className="title-font sm:text-4xl text-3xl mb-4 mx-4 font-medium text-blue-900">
-              Awareness
-            </h2>
-            <p className="mb-8 leading-relaxed mx-4">
-              Awareness is the first step towards change. We organize awareness
-              campaigns on various social and environmental issues, such as
-              hygiene, sanitation, climate change, and more. Our goal is to
-              raise awareness and inspire action in our communities.
-            </p>
-          </div>
-          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 lg:hidden md:hidden">
-            <img
-              className="object-cover object-center rounded"
-              alt="hero"
-              src={awareness}
-            />
-          </div>
-        </div>
-        <div className="container mx-auto flex px-5 py-4 md:flex-row flex-col items-center">
-          <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-            <h2 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-blue-900">
-              Healthcare
-            </h2>
-            <p className="mb-8 leading-relaxed">
-              We are passionate about improving the overall health and
-              well-being of communities. Through various health initiatives,
-              medical camps, and awareness programs, we strive to ensure that
-              everyone has access to healthcare services and information that
-              can save lives.
-            </p>
-          </div>
-          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-            <img
-              className="object-cover object-center rounded"
-              alt="hero"
-              src={helth}
-            />
-          </div>
-        </div>
-        <div className="container mx-auto flex px-5 py-10 md:flex-row flex-col items-center">
-          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 max-sm:hidden max-md:hidden ">
-            <img
-              className="object-cover object-center rounded"
-              alt="hero"
-              src={woman}
-            />
-          </div>
-          <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-            <h2 className="title-font sm:text-4xl text-3xl mb-4 mx-4 font-medium text-blue-900">
-              Women Empowerment
-            </h2>
-            <p className="mb-8 leading-relaxed mx-4">
-              Namaskar Humanity Welfare Society is dedicated to providing
-              services for women empowerment. The organization's mission is to
-              make women self-reliant, raise awareness about their rights, and
-              strengthen their role in society. Through various programs and
-              workshops, the society offers education, skill development, and
-              employment opportunities to empower women both economically and
-              socially.
-            </p>
-          </div>
-          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 lg:hidden md:hidden">
-            <img
-              className="object-cover object-center rounded"
-              alt="hero"
-              src={woman}
-            />
-          </div>
-        </div>
-      </section>
-      <section>
-        <div className="relative">
-          <div className="relative z-10 flex flex-col justify-center items-center h-full text-center">
-            <h2 className="text-4xl font-bold leading-tight mb-2 text-blue-900">
-              Register to become volunteer
-            </h2>
-            <p className="text-lg mb-8 w-[96%]">
-              Join Namaskar Humanity Welfare Society as a volunteer and become a
-              part of a mission to transform lives and build a better future for
-              those in need. Volunteering with us is not just about giving back,
-              but about making a real impact in the lives of underprivileged
-              communities. Whether you're passionate about education,
-              healthcare, women’s empowerment, or environmental sustainability,
-              your efforts can make a difference. As a registered volunteer,
-              you’ll have the opportunity to contribute your skills, time, and
-              compassion to meaningful projects that bring hope and change.
-              Together, we can create a more equitable and compassionate
-              society—your journey toward making a difference starts here!
-            </p>
+      {/* Testimonials Section */}
+      <TestimonialsSection />
+
+      {/* Call to Action Section */}
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
+        <div className="container mx-auto px-6 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto text-center text-white"
+          >
+            <motion.h2 
+              variants={itemVariants}
+              className="text-4xl md:text-5xl font-bold mb-6" 
+              style={{ fontFamily: "'Poppins', sans-serif" }}
+            >
+              Ready to Make a Difference?
+            </motion.h2>
+            
+            <motion.p 
+              variants={itemVariants}
+              className="text-xl mb-12 leading-relaxed" 
+              style={{ fontFamily: "'Inter', sans-serif" }}
+            >
+              Join Namaskar Humanity Welfare Society as a volunteer and become part of a mission to transform lives 
+              and build a better future for those in need. Your efforts can make a real impact in underprivileged communities.
+            </motion.p>
+
+            <motion.div 
+              variants={itemVariants}
+              className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+            >
             <Link
               to="/register-as-volunteer"
-              className="bg-green-300 text-gray-900 hover:bg-blue-300 py-2 px-6 rounded-full text-lg font-semibold transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
-            >
-              Get Started
+                className="group bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl"
+              >
+                <span className="flex items-center gap-2">
+                  Become a Volunteer
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </span>
             </Link>
-          </div>
-        </div>
-      </section>
-      <section className="sm:mt-24">
-        <div className="relative bg-gradient-to-r h-[50vh] my-3">
-          <div className="relative z-10 flex flex-col justify-center items-center h-full text-center">
-            <h2 className="text-4xl font-bold leading-tight mb-2 text-blue-900">
-              Get Involved
-            </h2>
-            <p className="text-lg mb-8 w-[96%]">
-              Namaskar Humanity Welfare Society is on a mission to uplift lives,
-              spread hope, and create a brighter tomorrow. Every donation is a
-              step towards building a world where compassion leads the way, and
-              no one is left behind. Join us in making a difference—because
-              together, we can transform lives. No act of kindness is too small;
-              every contribution brings us closer to a better world. Donate
-              today, and be the light that shines in someone’s darkest hour.
-            </p>
+              
             <Link
               to="/donate"
-              className="bg-green-300 text-gray-900 hover:bg-blue-300 py-2 px-6 rounded-full text-lg font-semibold transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg sm:mb-24"
+                className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 backdrop-blur-sm"
+              >
+                Make a Donation
+              </Link>
+            </motion.div>
+
+            <motion.div 
+              variants={itemVariants}
+              className="mt-12 bg-white/10 backdrop-blur-sm rounded-2xl p-8"
             >
-              Get Started
-            </Link>
-          </div>
+              <p className="text-lg leading-relaxed">
+                Whether you're passionate about education, healthcare, women's empowerment, or environmental sustainability, 
+                your contribution matters. Together, we can create a more equitable and compassionate society—your journey 
+                toward making a difference starts here!
+              </p>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
     </Layout>

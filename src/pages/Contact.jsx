@@ -1,164 +1,280 @@
-import { useState } from "react";
+import React from 'react';
+import { motion } from 'framer-motion';
 import Layout from "../layout/Layout";
-import axios from "axios";
-import LodingButton from "../components/LoadingButton";
-import getInTouch from "../../src/assets/wallpaper/get-in-touch.jpg";
-import { toast } from "react-toastify";
+import ContactForm from "../components/ContactForm";
+import { 
+  MapPinIcon, 
+  PhoneIcon, 
+  EnvelopeIcon,
+  ClockIcon,
+  ChatBubbleLeftRightIcon
+} from '@heroicons/react/24/outline';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({});
-  const [loading, setLoading] = useState(false);
-  const server = import.meta.env.VITE_SERVER;
+  const contactInfo = [
+    {
+      icon: MapPinIcon,
+      title: "Visit Us",
+      details: [
+        "Udahin Khurd Sirathu",
+        "Kaushambi, Uttar Pradesh",
+        "India - 212217"
+      ],
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      icon: PhoneIcon,
+      title: "Call Us",
+      details: [
+        "+91 8808250884",
+        "+91 7379164906",
+        "Available 9 AM - 6 PM"
+      ],
+      color: "from-green-500 to-emerald-500"
+    },
+    {
+      icon: EnvelopeIcon,
+      title: "Email Us",
+      details: [
+        "help@namaskarhumanity.org",
+        "info@namaskarhumanity.org",
+        "We reply within 24 hours"
+      ],
+      color: "from-purple-500 to-indigo-500"
+    },
+    {
+      icon: ClockIcon,
+      title: "Working Hours",
+      details: [
+        "Monday - Friday: 9 AM - 6 PM",
+        "Saturday: 10 AM - 4 PM",
+        "Sunday: Closed"
+      ],
+      color: "from-red-500 to-pink-500"
+    }
+  ];
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
   };
 
-  const handleSubmit = async (e) => {
-    setLoading(true);
-    e.preventDefault();
-    try {
-      const res = await axios.post(`${server}/message/send`, formData, {
-        headers: { "Content-Type": "application/json" },
-      });
-      if (res.data.success) {
-        toast.success(res.data.message);
-        setLoading(false);
-      }
-    } catch (error) {
-      toast.error(error.response.data.message);
-      setLoading(false);
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" }
     }
-    setLoading(false);
   };
 
   return (
     <Layout
-      title={"Namaskar Humanity Welfare Society -Contact"}
+      title={"Contact Us - Namaskar Humanity Welfare Society"}
       description={
-        "We would love to hear from you at Namaskar Humanity Welfare Society ! Whether you have questions, ideas, or want to join our mission of bringing positive change, your voice matters to us. Share your thoughts, Collaborate with us on projects, Volunteer or support our causes. Together, we can make a real difference in the lives of those who need it most. Let’s create a brighter future, one conversation at a time!"
+        "Get in touch with Namaskar Humanity Welfare Society. Whether you have questions, want to volunteer, or need support, we're here to help. Contact us today to join our mission of positive change."
       }
-      keywords={"help, educate, donate, welfare society"}
+      keywords={"contact, volunteer, donate, NGO, help, support, Namaskar Humanity"}
     >
-      <div className="mx-auto max-w-7xl px-4">
-        <div className="flex flex-col space-y-2 pb-2 pt-6 md:pt-12">
-          <div className="mx-auto max-w-max rounded-full border bg-gray-50 p-1 px-3">
-            <p className="text-center text-xs font-semibold leading-normal md:text-sm">
-              Share your thoughts
+      {/* Hero Section */}
+      <section className="relative py-20 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 overflow-hidden">
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="relative z-10 container mx-auto px-6 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="max-w-4xl mx-auto text-center text-white"
+          >
+            <motion.div variants={itemVariants} className="mb-8">
+              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-6 py-2 mb-6">
+                <ChatBubbleLeftRightIcon className="w-5 h-5" />
+                <span className="text-sm font-medium">Let's Connect</span>
+              </div>
+            </motion.div>
+
+            <motion.h1 
+              variants={itemVariants}
+              className="text-5xl md:text-7xl font-bold mb-6 leading-tight"
+              style={{ fontFamily: "'Poppins', sans-serif" }}
+            >
+              Get in <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">Touch</span>
+            </motion.h1>
+            
+            <motion.p 
+              variants={itemVariants}
+              className="text-xl md:text-2xl mb-8 leading-relaxed max-w-3xl mx-auto opacity-90"
+              style={{ fontFamily: "'Inter', sans-serif" }}
+            >
+              We'd love to hear from you! Whether you have questions, want to volunteer, 
+              or need support, we're here to help you make a difference.
+            </motion.p>
+
+            <motion.div variants={itemVariants} className="flex justify-center">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-left">
+                <p className="text-lg leading-relaxed">
+                  Share your thoughts • Collaborate with us • Volunteer or support our causes
+                  <br />
+                  <strong>Together, we can create a brighter future, one conversation at a time!</strong>
             </p>
           </div>
-          <p className="text-center text-3xl font-bold text-blue-900 md:text-5xl md:leading-10">
-            Love to hear from you
-          </p>
-          <p className="mx-auto w-full text-center text-base text-gray-600 md:text-xl">
-            We would love to hear from you at Namaskar Humanity Welfare Society
-            ! Whether you have questions, ideas, or want to join our mission of
-            bringing positive change, your voice matters to us. Share your
-            thoughts, Collaborate with us on projects, Volunteer or support our
-            causes. Together, we can make a real difference in the lives of
-            those who need it most. Let’s create a brighter future, one
-            conversation at a time!
-          </p>
+            </motion.div>
+          </motion.div>
         </div>
-        <div className="mx-auto max-w-7xl py-2 md:py-4">
-          <div className="grid items-center justify-items-center gap-x-4 gap-y-10 lg:grid-cols-2">
-            <div className="flex items-center justify-center">
-              <div className="px-2 md:px-12">
-                <p className="text-2xl font-bold text-blue-900 md:text-4xl">
-                  Get in touch
-                </p>
-                <p className="mt-4 text-lg text-gray-900">
-                  Feel free to drop us a message anytime. We look forward to
-                  hearing from you and working together for the greater good!
-                </p>
-                <form onSubmit={handleSubmit} className="mt-8 space-y-4">
-                  <div className="grid w-full gap-y-4 md:gap-x-4 lg:grid-cols-2"></div>
-                  <div className="grid w-full  items-center gap-1.5">
-                    <label
-                      className="text-sm font-medium leading-none text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      htmlFor="name"
-                    >
-                      Name
-                    </label>
-                    <input
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-50 dark:focus:ring-gray-400 dark:focus:ring-offset-gray-900"
-                      type="text"
-                      id="name"
-                      onChange={handleChange}
-                      placeholder="Name"
-                    />
+
+        {/* Decorative Elements */}
+        <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+        <div className="absolute bottom-20 right-10 w-32 h-32 bg-yellow-400/20 rounded-full blur-xl"></div>
+      </section>
+
+      {/* Contact Information Cards */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-6 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="max-w-7xl mx-auto"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                Contact <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Information</span>
+              </h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-8"></div>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto" style={{ fontFamily: "'Inter', sans-serif" }}>
+                Multiple ways to reach us. Choose what works best for you.
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {contactInfo.map((info, index) => (
+                <motion.div
+                  key={info.title}
+                  variants={itemVariants}
+                  className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 p-8 text-center hover:-translate-y-2"
+                >
+                  <div className={`w-16 h-16 bg-gradient-to-r ${info.color} rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                    <info.icon className="w-8 h-8 text-white" />
                   </div>
-                  <div className="grid w-full  items-center gap-1.5">
-                    <label
-                      className="text-sm font-medium leading-none text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      htmlFor="email"
-                    >
-                      Email
-                    </label>
-                    <input
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-50 dark:focus:ring-gray-400 dark:focus:ring-offset-gray-900"
-                      onChange={handleChange}
-                      type="text"
-                      id="email"
-                      placeholder="email"
-                    />
+                  
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                    {info.title}
+                  </h3>
+                  
+                  <div className="space-y-2">
+                    {info.details.map((detail, idx) => (
+                      <p key={idx} className="text-gray-600 text-sm leading-relaxed">
+                        {detail}
+                      </p>
+                    ))}
                   </div>
-                  <div className="grid w-full  items-center gap-1.5">
-                    <label
-                      className="text-sm font-medium leading-none text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      htmlFor="phone"
-                    >
-                      Phone number
-                    </label>
-                    <input
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-50 dark:focus:ring-gray-400 dark:focus:ring-offset-gray-900"
-                      type="tel"
-                      id="phone"
-                      onChange={handleChange}
-                      placeholder="Phone number"
-                    />
-                  </div>
-                  <div className="grid w-full  items-center gap-1.5">
-                    <label
-                      className="text-sm font-medium leading-none text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      htmlFor="message"
-                    >
-                      Message
-                    </label>
-                    <textarea
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-50 dark:focus:ring-gray-400 dark:focus:ring-offset-gray-900"
-                      id="message"
-                      onChange={handleChange}
-                      placeholder="Leave us a message"
-                      cols={3}
-                    />
-                  </div>
-                  {loading ? (
-                    <LodingButton
-                      content={"Sending..."}
-                      btnClass={
-                        "w-full rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                      }
-                    />
-                  ) : (
-                    <button
-                      type="submit"
-                      className="w-full rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                    >
-                      Send Message
-                    </button>
-                  )}
-                </form>
-              </div>
+                </motion.div>
+              ))}
             </div>
-            <img
-              alt="Contact us"
-              className="hidden max-h-[60%] w-full rounded-lg object-cover lg:block"
-              src={getInTouch}
-            />
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </section>
+
+      {/* Contact Form Section */}
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <ContactForm />
+          </div>
+                  </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="max-w-7xl mx-auto"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                Find <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Our Location</span>
+              </h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-8"></div>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto" style={{ fontFamily: "'Inter', sans-serif" }}>
+                Visit us at our headquarters in Uttar Pradesh, India.
+              </p>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="bg-gray-100 rounded-2xl overflow-hidden shadow-xl">
+              <div className="aspect-video bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                <div className="text-center p-8">
+                  <MapPinIcon className="w-16 h-16 text-blue-600 mx-auto mb-4" />
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Interactive Map</h3>
+                  <p className="text-gray-600 mb-6">
+                    Map integration will be available here showing our exact location in Kaushambi, Uttar Pradesh.
+                  </p>
+                  <div className="bg-white rounded-lg p-4 inline-block">
+                    <p className="font-semibold text-gray-900">Namaskar Humanity Welfare Society</p>
+                    <p className="text-gray-600">Udahin Khurd Sirathu, Kaushambi, UP 212217</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 bg-gradient-to-br from-gray-900 to-blue-900">
+        <div className="container mx-auto px-6 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto text-center text-white"
+          >
+            <motion.h2 
+              variants={itemVariants}
+              className="text-4xl md:text-5xl font-bold mb-6" 
+              style={{ fontFamily: "'Poppins', sans-serif" }}
+            >
+              Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">Questions</span>
+            </motion.h2>
+            
+            <motion.p 
+              variants={itemVariants}
+              className="text-xl mb-12 opacity-90" 
+              style={{ fontFamily: "'Inter', sans-serif" }}
+            >
+              Got questions? We've got answers! Here are some common inquiries we receive.
+            </motion.p>
+
+            <motion.div variants={itemVariants} className="grid md:grid-cols-2 gap-8 text-left">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+                <h3 className="text-xl font-semibold mb-4">How can I volunteer?</h3>
+                <p className="text-gray-200">
+                  You can register as a volunteer through our website or contact us directly. 
+                  We have opportunities in education, healthcare, and community development.
+                </p>
+              </div>
+              
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+                <h3 className="text-xl font-semibold mb-4">How can I make a donation?</h3>
+                <p className="text-gray-200">
+                  We accept donations through our secure online platform. Every contribution, 
+                  big or small, makes a significant impact in our community programs.
+                </p>
+            </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
     </Layout>
   );
 };
