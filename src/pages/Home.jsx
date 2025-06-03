@@ -11,7 +11,8 @@ import {
   AcademicCapIcon, 
   HeartIcon,
   TrophyIcon,
-  UsersIcon
+  UsersIcon,
+  BuildingOfficeIcon
 } from '@heroicons/react/24/outline';
 
 const Home = () => {
@@ -34,6 +35,12 @@ const Home = () => {
       number: "500+",
       label: "Students Educated",
       color: "from-green-500 to-emerald-500"
+    },
+    {
+      icon: BuildingOfficeIcon,
+      number: "10+",
+      label: "Cities",
+      color: "from-indigo-500 to-purple-500"
     },
     {
       icon: HeartIcon,
@@ -152,7 +159,7 @@ const Home = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8"
           >
             {stats.map((stat, index) => (
               <motion.div

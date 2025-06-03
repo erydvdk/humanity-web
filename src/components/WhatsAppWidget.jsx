@@ -2,7 +2,7 @@ import React from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 
 const WhatsAppWidget = () => {
-  const whatsappNumber = "918953668442";
+  const whatsappNumber = "918808250884";
   const message = "Hello! I'm interested in learning more about Namaskar Humanity Welfare Society.";
 
   const handleWhatsAppClick = () => {
